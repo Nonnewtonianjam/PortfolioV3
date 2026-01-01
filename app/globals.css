@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
+    --background: #ffffff;
+    --foreground: #000000;
+    --page-background: #ffffff;
+    --text-color: #ffffff;
+    --icon-color: #ffffff;
+    --monitor-frame-color: #ffffff;
+    
+    /* Bento card colors - Light mode */
+    --color-about: #6366F1;
+    --color-skills: #10B981;
+    --color-contact: #8B5CF6;
+    --color-software: #06B6D4;
+    --color-jam: #F97316;
+    --color-process: #F59E0B;
+    --color-projects: #EF4444;
+    --color-theme: #EC4899;
+    
+    /* Project card colors - Light mode */
+    --color-project-1: #0EA5E9;
+    --color-project-2: #06B6D4;
+    --color-project-3: #8B5CF6;
+  }
+
+  [data-theme="dark"] {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ffffff;
+    --page-background: #0a0a0a;
+    --text-color: #000000;
+    --icon-color: #000000;
+    --monitor-frame-color: #000000;
+    
+    /* Bento card colors - Dark mode (neon/electric colors for black text) */
+    --color-about: #C11CAD;
+    --color-skills: #C6E800;
+    --color-contact: #8338EC;
+    --color-software: #3A86FF;
+    --color-jam: #FB5607;
+    --color-process: #FFBE0B;
+    --color-projects: #FD2B3B;
+    --color-theme: #FF006E;
+    
+    /* Project card colors - Dark mode (neon) */
+    --color-project-1: #00BBFF;
+    --color-project-2: #00EEFF;
+    --color-project-3: #BB44FF;
+  }
+
+  html, body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Prevent flash of unstyled content during animations */
+  body {
+    visibility: hidden;
+  }
+
+  body.loaded {
+    visibility: visible;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Initial state for bento grid to prevent FOUC */
+.bento-grid-initial {
+  transform: scale(3);
+}
+
+.bento-column-initial {
+  gap: 72px;
+}
+
+/* Dark mode text and icon colors */
+[data-theme="dark"] .text-white {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .text-white\/90 {
+  color: var(--text-color) !important;
+  opacity: 0.9;
+}
+
+[data-theme="dark"] .text-white\/80 {
+  color: var(--text-color) !important;
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .text-white\/60 {
+  color: var(--text-color) !important;
+  opacity: 0.6;
+}
+
+/* Icon color in dark mode */
+[data-theme="dark"] svg {
+  color: var(--icon-color);
+}
+
+[data-theme="dark"] svg path,
+[data-theme="dark"] svg rect,
+[data-theme="dark"] svg circle,
+[data-theme="dark"] svg line {
+  stroke: var(--icon-color);
+}
+
+/* Ensure currentColor uses icon color */
+[data-theme="dark"] [stroke="currentColor"] {
+  stroke: var(--icon-color);
+}
+
+[data-theme="dark"] [fill="currentColor"] {
+  fill: var(--icon-color);
+}
+
+/* Monitor lines should be black in dark mode */
+[data-theme="dark"] svg path[stroke="white"] {
+  stroke: var(--icon-color);
 }

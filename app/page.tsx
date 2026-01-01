@@ -1,65 +1,330 @@
-import Image from "next/image";
+'use client';
+
+import { useRef, useEffect, useState } from 'react';
+import BentoCell from '../components/BentoCell';
+import BentoGrid from '../components/BentoGrid';
+import AnimatedName from '../components/AnimatedName';
+import OverlaySection from '../components/OverlaySection';
+import ProjectsOverlay from '../components/ProjectsOverlay';
+import SkillsOverlay from '../components/SkillsOverlay';
+import AboutOverlay from '../components/AboutOverlay';
+import ProcessOverlay from '../components/ProcessOverlay';
+import SoftwareDevOverlay from '../components/SoftwareDevOverlay';
+import ContactOverlay from '../components/ContactOverlay';
+import ProjectsSection from '../components/ProjectsSection';
+import ContactSection from '../components/ContactSection';
+import SkillsSection from '../components/SkillsSection';
+import AboutSection from '../components/AboutSection';
+import ProcessSection from '../components/ProcessSection';
+import SoftwareDevSection from '../components/SoftwareDevSection';
+import AboutIcon from '../components/AboutIcon';
+import PhoneIcon from '../components/PhoneIcon';
+import ProcessIcon from '../components/ProcessIcon';
+import SkillsIcon from '../components/SkillsIcon';
+import ProjectIcon from '../components/ProjectIcon';
+import ThemeToggle from '../components/ThemeToggle';
+import { useOverlayManager } from '../hooks/useOverlayManager';
+import { colors } from '../utils/colors';
 
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isAboutHovered, setIsAboutHovered] = useState(false);
+  const [isContactHovered, setIsContactHovered] = useState(false);
+  const [isProcessHovered, setIsProcessHovered] = useState(false);
+  const [isSkillsHovered, setIsSkillsHovered] = useState(false);
+  const [isProjectsHovered, setIsProjectsHovered] = useState(false);
+  const [isThemeHovered, setIsThemeHovered] = useState(false);
+  
+  // Cell refs
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  const topCenterRef = useRef<HTMLDivElement>(null);
+  const socialRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const themeRef = useRef<HTMLDivElement>(null);
+  
+  // Overlay refs
+  const aboutOverlayRef = useRef<HTMLDivElement>(null);
+  const skillsOverlayRef = useRef<HTMLDivElement>(null);
+  const contactOverlayRef = useRef<HTMLDivElement>(null);
+  const topCenterOverlayRef = useRef<HTMLDivElement>(null);
+  const socialOverlayRef = useRef<HTMLDivElement>(null);
+  const projectsOverlayRef = useRef<HTMLDivElement>(null);
+  
+  // Use overlay manager hook
+  const { handleCellClick, handleCloseOverlay } = useOverlayManager(containerRef);
+
+  // Click handlers
+  const handleProjectsClick = () => handleCellClick(projectsRef, projectsOverlayRef);
+  const handleAboutClick = () => handleCellClick(aboutRef, aboutOverlayRef);
+  const handleSkillsClick = () => handleCellClick(skillsRef, skillsOverlayRef);
+  const handleContactClick = () => handleCellClick(contactRef, contactOverlayRef);
+  const handleTopCenterClick = () => handleCellClick(topCenterRef, topCenterOverlayRef);
+  const handleSocialClick = () => handleCellClick(socialRef, socialOverlayRef);
+
+  // Prevent FOUC by ensuring animations start from the correct initial state
+  useEffect(() => {
+    // Add loaded class to show content when ready
+    document.body.classList.add('loaded');
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('loaded');
+    };
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="h-screen w-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'var(--page-background)' }}>
+      {/* Overlays */}
+      <AboutOverlay 
+        overlayRef={aboutOverlayRef} 
+        bgColor={colors.about}
+        onClose={() => handleCloseOverlay(aboutRef, aboutOverlayRef)}
+      >
+        <AboutSection />
+      </AboutOverlay>
+
+      <SkillsOverlay 
+        overlayRef={skillsOverlayRef} 
+        bgColor={colors.skills}
+        onClose={() => handleCloseOverlay(skillsRef, skillsOverlayRef)}
+      >
+        <SkillsSection />
+      </SkillsOverlay>
+
+      <ContactOverlay 
+        overlayRef={contactOverlayRef} 
+        bgColor={colors.contact}
+        onClose={() => handleCloseOverlay(contactRef, contactOverlayRef)}
+      >
+        <ContactSection />
+      </ContactOverlay>
+
+      <SoftwareDevOverlay 
+        overlayRef={topCenterOverlayRef} 
+        bgColor={colors.software}
+        onClose={() => handleCloseOverlay(topCenterRef, topCenterOverlayRef)}
+      >
+        <SoftwareDevSection />
+      </SoftwareDevOverlay>
+
+      <ProcessOverlay 
+        overlayRef={socialOverlayRef} 
+        bgColor={colors.process}
+        onClose={() => handleCloseOverlay(socialRef, socialOverlayRef)}
+      >
+        <ProcessSection />
+      </ProcessOverlay>
+
+      <ProjectsOverlay 
+        overlayRef={projectsOverlayRef} 
+        bgColor={colors.projects}
+        onClose={() => handleCloseOverlay(projectsRef, projectsOverlayRef)}
+      >
+        <ProjectsSection />
+      </ProjectsOverlay>
+
+      {/* Desktop Bento Grid - Hidden on mobile */}
+      <div className="hidden lg:flex items-center justify-center w-full h-full">
+        <BentoGrid containerRef={containerRef}>
+          {[
+            // Column 1 - 3 cells
+            <>
+              <BentoCell 
+                cellRef={aboutRef} 
+                onClick={handleAboutClick} 
+                bgColor={colors.about}
+                flex="0.8"
+                onMouseEnter={() => setIsAboutHovered(true)}
+                onMouseLeave={() => setIsAboutHovered(false)}
+              >
+                <div className="flex flex-col justify-between h-full w-full">
+                  <div className="flex flex-col justify-center flex-1">
+                    <h2 className="text-2xl font-bold text-white mb-3">About</h2>
+                    <p className="text-white/90">Creative developer</p>
+                  </div>
+                  <div className="flex justify-end">
+                    <AboutIcon 
+                      isHovered={isAboutHovered} 
+                      className="text-white"
+                    />
+                  </div>
+                </div>
+              </BentoCell>
+              <BentoCell 
+                cellRef={skillsRef} 
+                onClick={handleSkillsClick} 
+                bgColor={colors.skills}
+                flex="1.1"
+                onMouseEnter={() => setIsSkillsHovered(true)}
+                onMouseLeave={() => setIsSkillsHovered(false)}
+              >
+                <div className="flex flex-col justify-between h-full w-full">
+                  <div className="flex flex-col justify-center flex-1">
+                    <h3 className="text-2xl font-bold text-white">Skills</h3>
+                  </div>
+                  <div className="flex justify-end">
+                    <SkillsIcon 
+                      isHovered={isSkillsHovered} 
+                      className="text-white"
+                    />
+                  </div>
+                </div>
+              </BentoCell>
+              <BentoCell 
+                cellRef={contactRef} 
+                onClick={handleContactClick} 
+                bgColor={colors.contact}
+                flex="1.1"
+                onMouseEnter={() => setIsContactHovered(true)}
+                onMouseLeave={() => setIsContactHovered(false)}
+              >
+                <div className="relative flex items-center justify-between h-full w-full">
+                  <div className="absolute left-4 bottom-4">
+                    <PhoneIcon 
+                      isHovered={isContactHovered} 
+                      className="text-white"
+                    />
+                  </div>
+                  <div className="flex flex-col items-end justify-center ml-auto pr-4">
+                    <h3 className="text-2xl font-bold text-white">Contact</h3>
+                  </div>
+                </div>
+              </BentoCell>
+            </>,
+            
+            // Column 2 - 3 cells (center column with featured content)
+            <>
+              <BentoCell 
+                cellRef={topCenterRef} 
+                onClick={handleTopCenterClick} 
+                bgColor={colors.software}
+              >
+                <div className="text-center overflow-hidden">
+                  <h1 className="text-2xl font-bold text-white mb-2">Software Dev</h1>
+                  <p className="text-white/90">I make stuff</p>
+                </div>
+              </BentoCell>
+              <BentoCell bgColor={colors.jam}>
+                <AnimatedName />
+              </BentoCell>
+              <BentoCell 
+                cellRef={socialRef} 
+                onClick={handleSocialClick} 
+                bgColor={colors.process}
+                onMouseEnter={() => setIsProcessHovered(true)}
+                onMouseLeave={() => setIsProcessHovered(false)}
+              >
+                <div className="flex flex-col justify-between h-full w-full">
+                  <div className="flex flex-col justify-center flex-1">
+                    <h3 className="text-2xl font-bold text-white">Process</h3>
+                  </div>
+                  <div className="flex justify-end">
+                    <ProcessIcon 
+                      isHovered={isProcessHovered} 
+                      className="text-white"
+                    />
+                  </div>
+                </div>
+              </BentoCell>
+            </>,
+            
+            // Column 3 - 2 cells (asymmetric)
+            <>
+              <BentoCell 
+                cellRef={projectsRef} 
+                onClick={handleProjectsClick} 
+                bgColor={colors.projects}
+                onMouseEnter={() => setIsProjectsHovered(true)}
+                onMouseLeave={() => setIsProjectsHovered(false)}
+              >
+                <div className="flex flex-col justify-between h-full w-full">
+                  <div className="flex flex-col justify-center flex-1">
+                    <h3 className="text-2xl font-bold text-white">Projects</h3>
+                    <p className="text-white/90">View my work</p>
+                  </div>
+                  <div className="flex justify-end">
+                    <ProjectIcon 
+                      isHovered={isProjectsHovered} 
+                      className="text-white"
+                    />
+                  </div>
+                </div>
+              </BentoCell>
+              <BentoCell 
+                cellRef={themeRef} 
+                bgColor={colors.theme}
+                onMouseEnter={() => setIsThemeHovered(true)}
+                onMouseLeave={() => setIsThemeHovered(false)}
+              >
+                <div className="flex items-center justify-center h-full w-full">
+                  <ThemeToggle 
+                    isHovered={isThemeHovered} 
+                    className="text-white"
+                  />
+                </div>
+              </BentoCell>
+            </>
+          ]}
+        </BentoGrid>
+      </div>
+
+      {/* Mobile Layout - Visible only on mobile */}
+      <div className="lg:hidden flex flex-col w-full h-full overflow-y-auto px-6 py-6 gap-6">
+        {/* JAM Card - Top - Larger and more prominent */}
+        <div className="rounded-3xl p-10 min-h-[250px] flex items-center justify-center shadow-lg" style={{ backgroundColor: colors.jam }}>
+          <AnimatedName />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Projects Card */}
+        <div 
+          onClick={handleProjectsClick}
+          className="rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all shadow-lg"
+          style={{ backgroundColor: colors.projects }}
+        >
+          <div className="flex flex-col justify-center h-full">
+            <h3 className="text-4xl font-bold text-white mb-3">Projects</h3>
+            <p className="text-white/90 text-xl">View my work</p>
+          </div>
         </div>
-      </main>
+
+        {/* About Card */}
+        <div 
+          onClick={handleAboutClick}
+          className="rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all shadow-lg"
+          style={{ backgroundColor: colors.about }}
+        >
+          <div className="flex flex-col justify-center h-full">
+            <h2 className="text-4xl font-bold text-white mb-3">About</h2>
+            <p className="text-white/90 text-xl">Creative developer</p>
+          </div>
+        </div>
+
+        {/* Skills Card */}
+        <div 
+          onClick={handleSkillsClick}
+          className="rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all shadow-lg"
+          style={{ backgroundColor: colors.skills }}
+        >
+          <div className="flex flex-col justify-center h-full">
+            <h3 className="text-4xl font-bold text-white mb-3">Skills</h3>
+            <p className="text-white/90 text-xl">Technical expertise</p>
+          </div>
+        </div>
+
+        {/* Contact Card */}
+        <div 
+          onClick={handleContactClick}
+          className="rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all shadow-lg mb-6"
+          style={{ backgroundColor: colors.contact }}
+        >
+          <div className="flex flex-col justify-center h-full">
+            <h3 className="text-4xl font-bold text-white mb-3">Contact</h3>
+            <p className="text-white/90 text-xl">Get in touch</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
