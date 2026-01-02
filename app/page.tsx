@@ -302,111 +302,68 @@ export default function Home() {
       </div>
 
       {/* Mobile Layout - Visible only on mobile */}
-      <div className="lg:hidden flex flex-col w-full h-full overflow-y-auto px-6 py-8 gap-6">
-        {/* JAM Card - Top - Large, striking, static with drop shadow */}
-        <div className="mobile-card rounded-3xl p-4 min-h-[320px] flex items-center justify-center relative overflow-hidden border-2 shadow-lg" 
-             style={{ 
-               borderColor: 'var(--color-contact)', 
-               boxShadow: `0 8px 0 var(--color-contact)` 
-             }}>
-          <h1 className="text-[6rem] sm:text-[7rem] font-black tracking-tighter leading-none" style={{ color: 'var(--color-contact)' }}>
-            JAM
-          </h1>
-        </div>
-
-        {/* Projects Card - White with red text and drop shadow */}
-        <div 
-          onClick={handleProjectsClick}
-          className="mobile-card rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all border-2 shadow-lg"
-          style={{ 
-            borderColor: 'var(--color-projects)', 
-            boxShadow: `0 8px 0 var(--color-projects)` 
-          }}
-        >
-          <div className="flex items-center justify-between h-full">
-            <div className="flex flex-col justify-center flex-1">
-              <h3 className="text-4xl font-bold mb-2" style={{ color: 'var(--color-projects)' }}>Projects</h3>
-              <p className="text-xl" style={{ color: 'var(--color-projects)', opacity: 0.8 }}>View my work</p>
+      <div className="lg:hidden flex flex-col w-full h-full relative" style={{ backgroundColor: 'var(--page-background)' }}>
+        {/* Top Section - JAM vertically + full name */}
+        <div className="flex items-start p-6 pt-12">
+          {/* JAM + Full Name - Inline */}
+          <div className="flex flex-col">
+            {/* J + ohnathan */}
+            <div className="flex items-baseline">
+              <span className="text-6xl font-black leading-none" style={{ color: 'var(--color-contact)' }}>J</span>
+              <span className="text-lg font-light tracking-wide ml-1" style={{ color: 'var(--foreground)', opacity: 0.6 }}>ohnathan</span>
             </div>
-            <div className="flex-shrink-0 ml-4">
-              <ProjectIcon 
-                isHovered={true} 
-                iconColor="var(--color-projects)"
-              />
+            
+            {/* A + lexander */}
+            <div className="flex items-baseline">
+              <span className="text-6xl font-black leading-none" style={{ color: 'var(--color-contact)' }}>A</span>
+              <span className="text-lg font-light tracking-wide ml-1" style={{ color: 'var(--foreground)', opacity: 0.6 }}>lexander</span>
+            </div>
+            
+            {/* M + anney */}
+            <div className="flex items-baseline">
+              <span className="text-6xl font-black leading-none" style={{ color: 'var(--color-contact)' }}>M</span>
+              <span className="text-lg font-light tracking-wide ml-1" style={{ color: 'var(--foreground)', opacity: 0.6 }}>anney</span>
             </div>
           </div>
         </div>
 
-        {/* About Card - White with indigo text and drop shadow */}
-        <div 
-          onClick={handleAboutClick}
-          className="mobile-card rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all border-2 shadow-lg"
-          style={{ 
-            borderColor: 'var(--color-about)', 
-            boxShadow: `0 8px 0 var(--color-about)` 
-          }}
-        >
-          <div className="flex items-center justify-between h-full">
-            <div className="flex flex-col justify-center flex-1">
-              <h2 className="text-4xl font-bold mb-2" style={{ color: 'var(--color-about)' }}>About</h2>
-              <p className="text-xl" style={{ color: 'var(--color-about)', opacity: 0.8 }}>Creative developer</p>
-            </div>
-            <div className="flex-shrink-0 ml-4">
-              <AboutIcon 
-                isHovered={true} 
-                className="w-20 h-20"
-                iconColor="var(--color-about)"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Skills Card - White with green text and drop shadow */}
-        <div 
-          onClick={handleSkillsClick}
-          className="mobile-card rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all border-2 shadow-lg"
-          style={{ 
-            borderColor: 'var(--color-skills)', 
-            boxShadow: `0 8px 0 var(--color-skills)` 
-          }}
-        >
-          <div className="flex items-center justify-between h-full">
-            <div className="flex flex-col justify-center flex-1">
-              <h3 className="text-4xl font-bold mb-2" style={{ color: 'var(--color-skills)' }}>Skills</h3>
-              <p className="text-xl" style={{ color: 'var(--color-skills)', opacity: 0.8 }}>Technical expertise</p>
-            </div>
-            <div className="flex-shrink-0 ml-4">
-              <SkillsIcon 
-                isHovered={true} 
-                className="w-24 h-24"
-                iconColor="var(--color-skills)"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Card - White with purple text and drop shadow */}
-        <div className="mb-6">
-          <div 
-            onClick={handleContactClick}
-            className="mobile-card rounded-3xl p-8 min-h-[180px] cursor-pointer active:scale-[0.98] transition-all border-2 shadow-lg"
-            style={{ 
-              borderColor: 'var(--color-contact)', 
-              boxShadow: `0 8px 0 var(--color-contact)` 
-            }}
-          >
-            <div className="flex items-center justify-between h-full">
-              <div className="flex flex-col justify-center flex-1">
-                <h3 className="text-4xl font-bold mb-2" style={{ color: 'var(--color-contact)' }}>Contact</h3>
-                <p className="text-xl" style={{ color: 'var(--color-contact)', opacity: 0.8 }}>Get in touch</p>
-              </div>
-              <div className="flex-shrink-0 ml-4">
-                <PhoneIcon 
-                  isHovered={true} 
-                  className="w-16 h-16"
-                  iconColor="var(--color-contact)"
-                />
-              </div>
+        {/* Bottom Section - Navigation Menu */}
+        <div className="flex-1 flex flex-col justify-end pb-12">
+          <div className="px-6">
+            <div className="flex flex-col items-center space-y-6">
+              
+              {/* Projects */}
+              <button
+                onClick={handleProjectsClick}
+                className="w-full text-center py-4 text-2xl font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 text-black"
+              >
+                Projects
+              </button>
+              
+              {/* About */}
+              <button
+                onClick={handleAboutClick}
+                className="w-full text-center py-4 text-2xl font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 text-black"
+              >
+                About
+              </button>
+              
+              {/* Skills */}
+              <button
+                onClick={handleSkillsClick}
+                className="w-full text-center py-4 text-2xl font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 text-black"
+              >
+                Skills
+              </button>
+              
+              {/* Contact */}
+              <button
+                onClick={handleContactClick}
+                className="w-full text-center py-4 text-2xl font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 text-black"
+              >
+                Contact
+              </button>
+              
             </div>
           </div>
         </div>
