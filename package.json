@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "git add . && git commit -m \"Update portfolio\" && git push origin main && git push vercel main",
+    "deploy:interactive": "pwsh -ExecutionPolicy Bypass -File deploy.ps1"
   },
   "dependencies": {
     "gsap": "^3.14.2",
