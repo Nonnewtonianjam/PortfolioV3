@@ -4,9 +4,10 @@ import { gsap } from 'gsap';
 interface SkillsIconProps {
   isHovered: boolean;
   className?: string;
+  iconColor?: string;
 }
 
-export default function SkillsIcon({ isHovered, className = "" }: SkillsIconProps) {
+export default function SkillsIcon({ isHovered, className = "", iconColor }: SkillsIconProps) {
   const box1Ref = useRef<SVGRectElement>(null);
   const box2Ref = useRef<SVGRectElement>(null);
   const box3Ref = useRef<SVGRectElement>(null);
@@ -115,7 +116,7 @@ export default function SkillsIcon({ isHovered, className = "" }: SkillsIconProp
   }, [isHovered]);
 
   return (
-    <div ref={containerRef} className={`relative w-24 h-24 ${className}`}>
+    <div ref={containerRef} className={`relative w-24 h-24 ${className}`} style={{ color: iconColor }}>
       {/* Skills SVG - Individual Boxes (Bigger) */}
       <svg
         viewBox="-2 -2 28 28"

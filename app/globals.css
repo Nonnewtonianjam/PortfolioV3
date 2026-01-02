@@ -9,6 +9,9 @@
     --icon-color: #ffffff;
     --monitor-frame-color: #ffffff;
     
+    /* Viewport height fix for iOS */
+    --vh: 1vh;
+    
     /* Bento card colors - Light mode */
     --color-about: #6366F1;
     --color-skills: #10B981;
@@ -56,6 +59,16 @@
     background-color: var(--background);
     color: var(--foreground);
     transition: background-color 0.3s ease, color 0.3s ease;
+    /* Fix for iOS Safari address bar */
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for modern browsers */
+  }
+
+  /* iOS Safari viewport fix */
+  @supports (-webkit-touch-callout: none) {
+    html, body {
+      height: -webkit-fill-available;
+    }
   }
 
   /* Prevent flash of unstyled content during animations */
@@ -97,28 +110,79 @@
   opacity: 0.6;
 }
 
-/* Icon color in dark mode */
-[data-theme="dark"] svg {
+/* Desktop icon colors in dark mode - only apply to desktop, not mobile cards */
+[data-theme="dark"] .hidden.lg\:flex svg {
   color: var(--icon-color);
 }
 
-[data-theme="dark"] svg path,
-[data-theme="dark"] svg rect,
-[data-theme="dark"] svg circle,
-[data-theme="dark"] svg line {
+[data-theme="dark"] .hidden.lg\:flex svg path,
+[data-theme="dark"] .hidden.lg\:flex svg rect,
+[data-theme="dark"] .hidden.lg\:flex svg circle,
+[data-theme="dark"] .hidden.lg\:flex svg line {
   stroke: var(--icon-color);
 }
 
-/* Ensure currentColor uses icon color */
-[data-theme="dark"] [stroke="currentColor"] {
+/* Ensure currentColor uses icon color on desktop only */
+[data-theme="dark"] .hidden.lg\:flex [stroke="currentColor"] {
   stroke: var(--icon-color);
 }
 
-[data-theme="dark"] [fill="currentColor"] {
+[data-theme="dark"] .hidden.lg\:flex [fill="currentColor"] {
   fill: var(--icon-color);
 }
 
-/* Monitor lines should be black in dark mode */
-[data-theme="dark"] svg path[stroke="white"] {
+/* Monitor lines should be black in dark mode on desktop only */
+[data-theme="dark"] .hidden.lg\:flex svg path[stroke="white"] {
   stroke: var(--icon-color);
+}
+
+/* Mobile card styling for dark mode */
+.mobile-card {
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .mobile-card {
+  background-color: var(--page-background);
+}
+
+/* Custom scrollbar for project modals */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin: 24px 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+  background-clip: content-box;
+}
+
+/* Firefox scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+/* iOS Safari viewport height fix */
+.ios-viewport-fix {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+@supports (-webkit-touch-callout: none) {
+  .ios-viewport-fix {
+    height: -webkit-fill-available;
+  }
 }

@@ -4,9 +4,10 @@ import { gsap } from 'gsap';
 interface PhoneIconProps {
   isHovered: boolean;
   className?: string;
+  iconColor?: string;
 }
 
-export default function PhoneIcon({ isHovered, className = "" }: PhoneIconProps) {
+export default function PhoneIcon({ isHovered, className = "", iconColor }: PhoneIconProps) {
   const phonePathRef = useRef<SVGPathElement>(null);
   const ringPathsRef = useRef<SVGGElement>(null);
   const cordPathRef = useRef<SVGPathElement>(null);
@@ -94,12 +95,12 @@ export default function PhoneIcon({ isHovered, className = "" }: PhoneIconProps)
   }, [isHovered]);
 
   return (
-    <div ref={containerRef} className={`relative w-20 h-20 ${className}`}>
+    <div ref={containerRef} className={`relative w-16 h-16 ${className}`} style={{ color: iconColor }}>
       {/* Phone SVG */}
       <svg
         viewBox="0 0 24 24"
         className="absolute inset-0 w-full h-full"
-        style={{ transform: 'translate(20%, 0%) scale(1.7)' }}
+        style={{ transform: 'translate(0%, 0%) scale(1.4)' }}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -119,7 +120,7 @@ export default function PhoneIcon({ isHovered, className = "" }: PhoneIconProps)
       <svg
         viewBox="0 0 254 246"
         className="absolute inset-0 w-full h-full"
-        style={{ transform: 'translate(100%, 0%) scale(0.5)' }}
+        style={{ transform: 'translate(60%, 10%) scale(0.5)' }}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -155,7 +156,7 @@ export default function PhoneIcon({ isHovered, className = "" }: PhoneIconProps)
       <svg
         viewBox="0 0 620 369"
         className="absolute inset-0 w-full h-full"
-        style={{ transform: 'translate(-10%, 70%) scale(1)' }}
+        style={{ transform: 'translate(-30%, 70%) scale(1)' }}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

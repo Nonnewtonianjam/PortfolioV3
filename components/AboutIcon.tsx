@@ -4,9 +4,10 @@ import { gsap } from 'gsap';
 interface AboutIconProps {
   isHovered: boolean;
   className?: string;
+  iconColor?: string;
 }
 
-export default function AboutIcon({ isHovered, className = "" }: AboutIconProps) {
+export default function AboutIcon({ isHovered, className = "", iconColor }: AboutIconProps) {
   const hairPathRef = useRef<SVGPathElement>(null);
   const arrowPathRef = useRef<SVGPathElement>(null);
   const meGroupRef = useRef<SVGGElement>(null);
@@ -119,7 +120,7 @@ export default function AboutIcon({ isHovered, className = "" }: AboutIconProps)
   }, [isHovered]);
 
   return (
-    <div ref={containerRef} className={`relative w-30 h-30 ${className}`} style={{ transform: 'scale(1.5)' }}>
+    <div ref={containerRef} className={`relative w-20 h-20 ${className}`} style={{ transform: 'scale(1.0)', color: iconColor }}>
       {/* Head SVG - always visible */}
       <svg
         viewBox="0 0 512 512"
