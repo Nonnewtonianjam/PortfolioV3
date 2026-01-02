@@ -34,7 +34,7 @@ echo ✓ Successfully pushed to origin
 
 echo.
 echo Pushing to Vercel repository (vercel)...
-git push vercel master
+git push vercel master:main
 if %errorlevel% neq 0 (
     echo ❌ Failed to push to vercel
     pause

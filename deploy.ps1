@@ -34,7 +34,7 @@ Write-Host "✓ Successfully pushed to origin" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "Pushing to Vercel repository (vercel)..." -ForegroundColor Blue
-git push vercel master
+git push vercel master:main
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Failed to push to vercel" -ForegroundColor Red
     Read-Host "Press Enter to exit"
