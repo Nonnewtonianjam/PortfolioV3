@@ -24,7 +24,7 @@ if (-not $changes) {
 }
 
 Write-Host "Pushing to original repository (origin)..." -ForegroundColor Blue
-git push origin main
+git push origin master
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Failed to push to origin" -ForegroundColor Red
     Read-Host "Press Enter to exit"
@@ -34,7 +34,7 @@ Write-Host "✓ Successfully pushed to origin" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "Pushing to Vercel repository (vercel)..." -ForegroundColor Blue
-git push vercel main
+git push vercel master
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Failed to push to vercel" -ForegroundColor Red
     Read-Host "Press Enter to exit"

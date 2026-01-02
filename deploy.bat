@@ -24,7 +24,7 @@ if "%changes%"=="" (
 )
 
 echo Pushing to original repository (origin)...
-git push origin main
+git push origin master
 if %errorlevel% neq 0 (
     echo ❌ Failed to push to origin
     pause
@@ -34,7 +34,7 @@ echo ✓ Successfully pushed to origin
 
 echo.
 echo Pushing to Vercel repository (vercel)...
-git push vercel main
+git push vercel master
 if %errorlevel% neq 0 (
     echo ❌ Failed to push to vercel
     pause
