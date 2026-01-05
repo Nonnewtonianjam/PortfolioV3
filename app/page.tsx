@@ -23,6 +23,7 @@ import ProcessIcon from '../components/ProcessIcon';
 import SkillsIcon from '../components/SkillsIcon';
 import ProjectIcon from '../components/ProjectIcon';
 import ThemeToggle from '../components/ThemeToggle';
+import MobileBackgroundAnimation from '../components/MobileBackgroundAnimation';
 import { useOverlayManager } from '../hooks/useOverlayManager';
 import { colors } from '../utils/colors';
 
@@ -106,7 +107,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center overflow-hidden ios-viewport-fix" style={{ backgroundColor: 'var(--page-background)' }}>
+    <div className="h-screen w-screen flex items-center justify-center overflow-hidden ios-viewport-fix relative" style={{ backgroundColor: 'var(--page-background)' }}>
+      {/* Mobile Background Animation */}
+      <MobileBackgroundAnimation />
+      
       {/* Overlays */}
       <AboutOverlay 
         overlayRef={aboutOverlayRef} 
@@ -302,7 +306,7 @@ export default function Home() {
       </div>
 
       {/* Mobile Layout - Visible only on mobile */}
-      <div className="lg:hidden flex flex-col w-full h-full relative" style={{ backgroundColor: 'var(--page-background)' }}>
+<div className="lg:hidden flex flex-col w-full h-full relative" style={{ backgroundColor: 'transparent', zIndex: 20 }}>
         {/* Top Section - JAM vertically + full name */}
         <div className="flex items-start p-6 pt-12">
           {/* JAM + Full Name - Inline */}
